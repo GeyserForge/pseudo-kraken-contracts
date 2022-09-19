@@ -1,4 +1,4 @@
-const { deployContract, getBlockTimestamp, mineBlockTimestamp } = require('../helpers.js');
+const { deployContract, getBlockTimestamp, mineBlockTimestamp } = require('../test/helpers.js');
 const { expect } = require('chai');
 const { constants } = require('@openzeppelin/test-helpers');
 const { ZERO_ADDRESS } = constants;

@@ -1,0 +1,89 @@
+.exit
+exit
+);
+let dCtr = await contract.deploy(uri, _
+let dCtr = await contract.deploy(uri, _acc);
+let deployedCtr = 0;
+let deployedCtr = await contract.deploy(uri, _acc);
+let deployedCtr = await contract.deploy([uri, _acc]);
+           0xBF9d7541915Ae295e09C70ea341ad5A25a76f4f9];
+           0x817988c5De46c66895eF071346720a36A6AAF99F,
+           0x4541d1FB7796604920A1633b4b80d50D00D6295A,
+           0x2293014cA33B9D3dB2Bf2470c2f4Ee3419f2c9C8,
+           0x75d4bdBf6593ed463e9625694272a0FF9a6D346F,
+           0x4e2f98c96e2d595a83AFa35888C4af58Ac343E44,
+           0x4ec48e744916517754285e70038be83d107a695c,
+const _acc = [0xb6A914d07553D7Db7a60e4eAFB4d5935cAdF58eb,
+const uri = "dummyURI";
+const deployed = await contract.deploy();
+const contract = await ethers.getContractFactory("PSEUDO")
+const ctr = await ethers.getContractFactory("PSEUDO")
+const ctr = ethers.getContractFactory("PSEUDO")
+ethers
+                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                    payable(msg.sender).transfer(address(this).balance);
+                                                                                                                                                                                                                                                                                                                                                                            require(msg.sender == deployer, "Only owner");
+                                                                                                                                                                                                                                                                                                                                                                    function withdraw() external {
+                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                            _mint(msg.sender, 10);
+                                                                                                                                                                                                                                                                                                                                                    require(mintEnabled, "Minting is not enabled");
+                                                                                                                                                                                                                                                                                                                                            require(totalSupply() + 10 < MAX_SUPPLY, "Max supply reached");
+                                                                                                                                                                                                                                                                                                                                    require(msg.value >= MINT_PRICE * 10, "Not enough ETH");
+                                                                                                                                                                                                                                                                                                                            function mintTen() external payable {
+                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                    _mint(msg.sender, 5);
+                                                                                                                                                                                                                                                                                                            require(mintEnabled, "Minting is not enabled");
+                                                                                                                                                                                                                                                                                                    require(totalSupply() + 5 < MAX_SUPPLY, "Max supply reached");
+                                                                                                                                                                                                                                                                                            require(msg.value >= MINT_PRICE * 5, "Not enough ETH");
+                                                                                                                                                                                                                                                                                    function mintFive() external payable {
+                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                            _mint(msg.sender, 1);
+                                                                                                                                                                                                                                                                    require(mintEnabled, "Minting is not enabled");
+                                                                                                                                                                                                                                                            require(totalSupply() + 1 < MAX_SUPPLY, "Max supply reached");
+                                                                                                                                                                                                                                                    require(msg.value >= MINT_PRICE, "Not enough ETH");
+                                                                                                                                                                                                                                            function mint() external payable {
+                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                    return baseUri;
+                                                                                                                                                                                                                            function _baseURI() internal view virtual override returns (string memory) {
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    baseUri = _baseUri;
+                                                                                                                                                                                                            mintEnabled = true;
+                                                                                                                                                                                                    require(msg.sender == deployer, "Only deployer can set minting");
+                                                                                                                                                                                            function setMintEnabled(string memory _baseUri) external {
+                                                                                                                                                                                        }
+                                                                                                                                                                                    mintEnabled = toggle;
+                                                                                                                                                                            require(msg.sender == deployer, "Only deployer can toggle minting");
+                                                                                                                                                                    function toggleMintEnabled(bool toggle) external {
+                                                                                                                                                                }
+                                                                                                                                                            baseUri = _baseUri;
+                                                                                                                                                    require(msg.sender == deployer, "Only deployer can update base URI");
+                                                                                                                                            function updateBaseURI(string memory _baseUri) external {
+                                                                                                                                        }
+                                                                                                                                    return startTokenId;
+                                                                                                                            function _startTokenId() internal view override returns (uint256) {
+                                                                                                                        }
+                                                                                                                    baseUri = _baseUri;
+                                                                                                            _mintERC2309(initAddresses[7], 47); // BrocDev
+                                                                                                    _mintERC2309(initAddresses[6], 58); // Mono + Treasury
+                                                                                            _mintERC2309(initAddresses[5], 42); // Giveaways
+                                                                                    _mintERC2309(initAddresses[4], 333); // Sudo LP
+                                                                            _mintERC2309(initAddresses[3], 21);
+                                                                    _mintERC2309(initAddresses[2], 21);
+                                                            _mintERC2309(initAddresses[1], 50);
+                                                    _mintERC2309(initAddresses[0], 21);
+                                            deployer = msg.sender;
+                                    // @todo Mint to specific wallet addresses
+                            constructor(string memory _baseUri, address[8] memory initAddresses) ERC721A("Pseudo Krakens", "PSEUDO") {
+                        uint256 public startTokenId;
+                    uint256 public constant MINT_PRICE = 0.01 ether;
+                uint256 public constant MAX_SUPPLY = 3000;
+            string public baseUri;
+        address public deployer;
+    bool public mintEnabled = false;
+contract PSEUDO is ERC721AQueryable {
+import "./extensions/ERC721AQueryable.sol";
+pragma solidity ^0.8.4;
+// SPDX-License-Identifier: UNLICENSED
+.load contracts/PSEUDO.sol
+.help
+help
