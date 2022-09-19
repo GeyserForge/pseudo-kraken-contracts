@@ -14,6 +14,15 @@ const createTestSuite = ({ contract, constructorArgs }) =>
     context(`${contract}`, function () {
       beforeEach(async function () {
         this.erc721a = await deployContract(contract, constructorArgs);
+        // this.erc721a = await deployContract('PSEUDO', ['dummyURI',
+        //   [0xb6A914d07553D7Db7a60e4eAFB4d5935cAdF58eb,
+        //    0x4ec48e744916517754285e70038be83d107a695c,
+        //    0x4e2f98c96e2d595a83AFa35888C4af58Ac343E44,
+        //    0x75d4bdBf6593ed463e9625694272a0FF9a6D346F,
+        //    0x2293014cA33B9D3dB2Bf2470c2f4Ee3419f2c9C8,
+        //    0x4541d1FB7796604920A1633b4b80d50D00D6295A,
+        //    0x817988c5De46c66895eF071346720a36A6AAF99F,
+        //    0xBF9d7541915Ae295e09C70ea341ad5A25a76f4f9]]);
         this.receiver = await deployContract('ERC721ReceiverMock', [RECEIVER_MAGIC_VALUE, this.erc721a.address]);
         this.startTokenId = this.erc721a.startTokenId ? (await this.erc721a.startTokenId()).toNumber() : 0;
 
@@ -53,7 +62,7 @@ const createTestSuite = ({ contract, constructorArgs }) =>
 
         describe('baseURI', async function () {
           it('sends an empty URI by default', async function () {
-            expect(await this.erc721a.baseURI()).to.eq('');
+            expect(await this.erc721a.baseURI()).to.eq('dummyURI');
           });
         });
       });
@@ -703,54 +712,62 @@ const createTestSuite = ({ contract, constructorArgs }) =>
     });
   };
 
-describe('ERC721A', createTestSuite({ contract: 'ERC721AMock', constructorArgs: ['Azuki', 'AZUKI'] }));
+describe('PSEUDO', createTestSuite({ contract: 'PSEUDO', constructorArgs: ["Pseudo Krakens", "PSEUDO", 'dummyURI',
+  ['0xb6A914d07553D7Db7a60e4eAFB4d5935cAdF58eb',
+   '0x4ec48e744916517754285e70038be83d107a695c',
+   '0x4e2f98c96e2d595a83AFa35888C4af58Ac343E44',
+   '0x75d4bdBf6593ed463e9625694272a0FF9a6D346F',
+   '0x2293014cA33B9D3dB2Bf2470c2f4Ee3419f2c9C8',
+   '0x4541d1FB7796604920A1633b4b80d50D00D6295A',
+   '0x817988c5De46c66895eF071346720a36A6AAF99F',
+   '0xBF9d7541915Ae295e09C70ea341ad5A25a76f4f9']] }));
 
-describe(
-  'ERC721A override _startTokenId()',
-  createTestSuite({ contract: 'ERC721AStartTokenIdMock', constructorArgs: ['Azuki', 'AZUKI', 1] })
-);
+// describe(
+//   'ERC721A override _startTokenId()',
+//   createTestSuite({ contract: 'ERC721AStartTokenIdMock', constructorArgs: ['Azuki', 'AZUKI', 1] })
+// );
 
-describe('ERC721A with ERC2309', async function () {
-  beforeEach(async function () {
-    const [owner, addr1] = await ethers.getSigners();
-    this.owner = owner;
-    this.addr1 = addr1;
+// describe('ERC721A with ERC2309', async function () {
+//   beforeEach(async function () {
+//     const [owner, addr1] = await ethers.getSigners();
+//     this.owner = owner;
+//     this.addr1 = addr1;
 
-    let args;
-    args = ['Azuki', 'AZUKI', this.owner.address, 1, true];
-    this.erc721aMint1 = await deployContract('ERC721AWithERC2309Mock', args);
-    args = ['Azuki', 'AZUKI', this.owner.address, 10, true];
-    this.erc721aMint10 = await deployContract('ERC721AWithERC2309Mock', args);
-  });
+//     let args;
+//     args = ['Azuki', 'AZUKI', this.owner.address, 1, true];
+//     this.erc721aMint1 = await deployContract('ERC721AWithERC2309Mock', args);
+//     args = ['Azuki', 'AZUKI', this.owner.address, 10, true];
+//     this.erc721aMint10 = await deployContract('ERC721AWithERC2309Mock', args);
+//   });
 
-  it('emits a ConsecutiveTransfer event for single mint', async function () {    
-    expect(this.erc721aMint1.deployTransaction)
-      .to.emit(this.erc721aMint1, 'ConsecutiveTransfer')
-      .withArgs(0, 0, ZERO_ADDRESS, this.owner.address);
-  });
+//   it('emits a ConsecutiveTransfer event for single mint', async function () {    
+//     expect(this.erc721aMint1.deployTransaction)
+//       .to.emit(this.erc721aMint1, 'ConsecutiveTransfer')
+//       .withArgs(0, 0, ZERO_ADDRESS, this.owner.address);
+//   });
 
-  it('emits a ConsecutiveTransfer event for a batch mint', async function () {    
-    expect(this.erc721aMint10.deployTransaction)
-      .to.emit(this.erc721aMint10, 'ConsecutiveTransfer')
-      .withArgs(0, 9, ZERO_ADDRESS, this.owner.address);
-  });
+//   it('emits a ConsecutiveTransfer event for a batch mint', async function () {    
+//     expect(this.erc721aMint10.deployTransaction)
+//       .to.emit(this.erc721aMint10, 'ConsecutiveTransfer')
+//       .withArgs(0, 9, ZERO_ADDRESS, this.owner.address);
+//   });
 
-  it('requires quantity to be below mint limit', async function () {
-    let args;
-    const mintLimit = 5000;
-    args = ['Azuki', 'AZUKI', this.owner.address, mintLimit, true];
-    await deployContract('ERC721AWithERC2309Mock', args);
-    args = ['Azuki', 'AZUKI', this.owner.address, mintLimit + 1, true];
-    await expect(deployContract('ERC721AWithERC2309Mock', args)).to.be.revertedWith('MintERC2309QuantityExceedsLimit');
-  })
+//   it('requires quantity to be below mint limit', async function () {
+//     let args;
+//     const mintLimit = 5000;
+//     args = ['Azuki', 'AZUKI', this.owner.address, mintLimit, true];
+//     await deployContract('ERC721AWithERC2309Mock', args);
+//     args = ['Azuki', 'AZUKI', this.owner.address, mintLimit + 1, true];
+//     await expect(deployContract('ERC721AWithERC2309Mock', args)).to.be.revertedWith('MintERC2309QuantityExceedsLimit');
+//   })
 
-  it('rejects mints to the zero address', async function () {
-    let args = ['Azuki', 'AZUKI', ZERO_ADDRESS, 1, true];
-    await expect(deployContract('ERC721AWithERC2309Mock', args)).to.be.revertedWith('MintToZeroAddress');
-  });
+//   it('rejects mints to the zero address', async function () {
+//     let args = ['Azuki', 'AZUKI', ZERO_ADDRESS, 1, true];
+//     await expect(deployContract('ERC721AWithERC2309Mock', args)).to.be.revertedWith('MintToZeroAddress');
+//   });
 
-  it('requires quantity to be greater than 0', async function () {
-    let args = ['Azuki', 'AZUKI', this.owner.address, 0, true];
-    await expect(deployContract('ERC721AWithERC2309Mock', args)).to.be.revertedWith('MintZeroQuantity');
-  });
-});
+//   it('requires quantity to be greater than 0', async function () {
+//     let args = ['Azuki', 'AZUKI', this.owner.address, 0, true];
+//     await expect(deployContract('ERC721AWithERC2309Mock', args)).to.be.revertedWith('MintZeroQuantity');
+//   });
+// });
